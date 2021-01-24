@@ -1,5 +1,16 @@
 #lang br/quicklang
 
+(define return-cc-stack empty)
+
+(define (pop-return!)
+  (when (empty? return-cc-stack) (error "Cannot return from top level"))
+  (let [(top (car return-cc-stack))]
+    (set! return-cc-stack (cdr return-cc-stack))
+    top))
+
+(define (push-return! cc)
+  (set! return-cc-stack (cons cc return-cc-stack)))
+
 (define-macro (lol-mb PARSE-TREE)
   #'(#%module-begin
      PARSE-TREE))
@@ -54,4 +65,27 @@
         [(expr->bool expr) 1]
         [else 0]))
 
-(provide program block statement declare assign expression cast)
+(define-macro-cases define-func
+  [(define-func ID BLOCK)
+   #'(define (ID)
+       (let/ec return-cc
+       (push-return! return-cc)
+       BLOCK
+       (pop-return! return-cc)
+       (void)))]
+  [(define-func ID ARG ... BLOCK)
+   #'(define (ID ARG ...)
+       (let/ec return-cc
+       (push-return! return-cc)
+       BLOCK
+       (pop-return!)
+       (void)))])
+
+(define-macro-cases return
+  [(return) #'((pop-return!) (void))]
+  [(return EXPR) #'((pop-return!) EXPR)])
+
+(define-macro (call-func FUNC ARG ...)
+  #'(FUNC ARG ...))
+  
+(provide program block statement declare assign expression cast define-func call-func return)

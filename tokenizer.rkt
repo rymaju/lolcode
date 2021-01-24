@@ -4,7 +4,9 @@
 (define-lex-abbrev digits (:+ (char-set "0123456789")))
 (define-lex-abbrev varchars (:seq alphabetic (:* (:or alphabetic numeric "_"))  ))
 (define-lex-abbrev booleans (:or "WIN" "FAIL"))
-(define-lex-abbrev reserved-terms (:or "HAI" "R" "KTHXBYE" "I HAS A" "ITZ" "MAEK" "A"))
+(define-lex-abbrev reserved-terms (:or "HAI" "R" "KTHXBYE" "I HAS A" "ITZ" "MAEK" "A"
+                                       "HOW IZ I" "YR" "AN YR" "IF U SAY SO" "I IZ" "MKAY"
+                                       "FOUND YR" "GTFO"))
 (define-lex-abbrev types (:or "TROOF" "YARN" "NUMBR" "NUMBAR" "NOOB"))
 
 (define (make-tokenizer port)
