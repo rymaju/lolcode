@@ -124,4 +124,16 @@
 (define-macro (call-func FUNC ARG ...)
   #'(FUNC ARG ...))
 
-(provide program block statement declare assign expression cast define-func call-func return statement-expresssion it)
+
+(define (math operator expression1 expression2)
+  (println operator)
+  (match operator
+    ["SUM OF" (+ expression1 expression2)]
+    ["DIFF OF" (- expression1 expression2)]
+    ["PRODUKT OF" (* expression1 expression2)]
+    ["QUOSHUNT OF" (/ expression1 expression2)]
+    ["MOD OF" (modulo expression1 expression2)]
+    ["BIGGR OF" (max expression1 expression2)]
+    ["SMALLR OF" (min expression1 expression2)]))
+
+(provide program block statement declare assign expression cast define-func call-func return statement-expresssion it math)
