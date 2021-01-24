@@ -1,5 +1,8 @@
 #lang br/quicklang
 
+
+;; Auxilary state
+
 (define return-cc-stack empty)
 
 (define (pop-return!)
@@ -7,9 +10,34 @@
   (let [(top (car return-cc-stack))]
     (set! return-cc-stack (cdr return-cc-stack))
     top))
+    
 
 (define (push-return! cc)
   (set! return-cc-stack (cons cc return-cc-stack)))
+
+(define it-stack (list (void)))
+
+(define (pop-it!) 
+  (when (empty? it-stack) (error "!!! IT-stack was empty, invariant broken (panic and scream) !!!"))
+  (let [(top (car it-stack))]
+    (set! it-stack (cdr it-stack))
+    top))
+
+(define (push-it! expr)
+  (set! it-stack (cons expr it-stack)))
+
+(define (set-it! expr)
+  (set! it-stack (cons expr (cdr it-stack))))
+
+(define (peek-it)
+  (car it-stack))
+
+(define it peek-it)
+
+; todo: bop-it!, pull-it!, twist-it!, spin-it!
+
+;-------------------------------------------------------------------------
+
 
 (define-macro (lol-mb PARSE-TREE)
   #'(#%module-begin
@@ -32,6 +60,8 @@
 (define-macro (assign VAR VAL) #'(set! VAR VAL))
 
 (define-macro (expression VAL) #'VAL)
+
+(define (statement-expresssion expr) (set-it! expr))
 
 (define (cast expr type)
   (match type
@@ -69,23 +99,29 @@
   [(define-func ID BLOCK)
    #'(define (ID)
        (let/ec return-cc
-       (push-return! return-cc)
-       BLOCK
-       (pop-return! return-cc)
-       (void)))]
+         (push-return! return-cc)
+         (push-it! (peek-it))
+         BLOCK
+         (pop-return! return-cc)
+         (pop-it!)))]
   [(define-func ID ARG ... BLOCK)
    #'(define (ID ARG ...)
        (let/ec return-cc
-       (push-return! return-cc)
-       BLOCK
-       (pop-return!)
-       (void)))])
+         (push-return! return-cc)
+         (push-it! (peek-it))
+         BLOCK
+         (pop-return!)
+         (pop-it!)))])
 
 (define-macro-cases return
-  [(return) #'((pop-return!) (void))]
-  [(return EXPR) #'((pop-return!) EXPR)])
+  [(return) #'(let ()
+                (pop-it!)
+                ((pop-return!) (void)))]
+  [(return EXPR) #'(let ()
+                     (pop-it!)
+                     ((pop-return!) EXPR))])
 
 (define-macro (call-func FUNC ARG ...)
   #'(FUNC ARG ...))
-  
-(provide program block statement declare assign expression cast define-func call-func return)
+
+(provide program block statement declare assign expression cast define-func call-func return statement-expresssion it)

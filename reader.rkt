@@ -5,8 +5,8 @@
   (define parse-tree (parse path (make-tokenizer port)))
   
   (define module-datum (strip-bindings
-   #`(module lolcode "expander.rkt"
-       #,parse-tree)))
+                        #`(module lolcode "expander.rkt"
+                            #,parse-tree)))
   (datum->syntax #f module-datum))
 
 (provide (contract-out

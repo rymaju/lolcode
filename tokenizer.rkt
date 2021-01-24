@@ -6,7 +6,7 @@
 (define-lex-abbrev booleans (:or "WIN" "FAIL"))
 (define-lex-abbrev reserved-terms (:or "HAI" "R" "KTHXBYE" "I HAS A" "ITZ" "MAEK" "A"
                                        "HOW IZ I" "YR" "AN YR" "IF U SAY SO" "I IZ" "MKAY"
-                                       "FOUND YR" "GTFO"))
+                                       "FOUND YR" "GTFO" "IT"))
 (define-lex-abbrev types (:or "TROOF" "YARN" "NUMBR" "NUMBAR" "NOOB"))
 
 (define (make-tokenizer port)
