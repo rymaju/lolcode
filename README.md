@@ -2,7 +2,7 @@
 
 Implementation of [LOLCODE](https://en.wikipedia.org/wiki/LOLCODE) in [Racket](https://racket-lang.org/). Currently the plan is to hack everything in [spec 1.2](https://github.com/justinmeza/lolcode-spec/blob/master/v1.2/lolcode-spec-v1.2.md) together  with `#lang br` to get a proof of concept down. Once thats done, I plan to do a proper rewrite in Typed Racket or Racket with Contracts. Finally, robust testing with `rackunit`.
 
-Once 1.2 is down, I plan to branch it off to another branch off of `main`, and start work on 1.3 with backwards compatibility with 1.2.
+Once 1.2 is down, I plan to branch it off to another branch off of `main`, and start work on 1.3 with backwards compatibility.
 
 ## 🔨 Current status
 
