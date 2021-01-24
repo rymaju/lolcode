@@ -11,7 +11,7 @@ Once 1.2 is down, I plan to branch it off to another branch off of `main`, and s
 - [x] Assignment and Variables
 - [x] Casting
 - [x] Functions
-- [ ] Math
+- [x] Math
 - [ ] Comparison
 - [ ] If/else
 - [ ] Case
