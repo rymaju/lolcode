@@ -20,9 +20,10 @@ Legend:
 - ✔️ Comparison
 - 🚧 IT
 - ✔️ Comparison
-- ❌ If/else
+- ✔️ If/else
 - ❌ Case
-- ❌ IO
+- ❌ Loops
+- 🚧 IO
 - ❌ String formatting
 
 ### ⚖️ Milestone: Rewrite with types or contracts
