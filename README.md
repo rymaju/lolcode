@@ -6,17 +6,24 @@ Once 1.2 is down, I plan to branch it off to another branch off of `main`, and s
 
 ## 🔨 Current status
 
+Legend:
+- ✔️ Complete!
+- 🚧 Work in Progress: at least partially implemented but failing at least one test
+- ❌ Incomplete / Not Started
+
 ### 🌺 Milestone: proof of concept LOLCODE 1.2 in `#lang br`
 
-- [x] Assignment and Variables
-- [x] Casting
-- [x] Functions
-- [x] Math
-- [ ] Comparison
-- [ ] If/else
-- [ ] Case
-- [ ] IO
-- [ ] String formatting
+- ✔️ Assignment and Variables
+- ✔️ Casting
+- ✔️ Functions
+- ✔️ Math
+- ✔️ Comparison
+- 🚧 IT
+- ✔️ Comparison
+- ❌ If/else
+- ❌ Case
+- ❌ IO
+- ❌ String formatting
 
 ### ⚖️ Milestone: Rewrite with types or contracts
 
