@@ -102,7 +102,7 @@
          (push-return! return-cc)
          (push-it! (peek-it))
          BLOCK
-         (pop-return! return-cc)
+         (pop-return!)
          (pop-it!)))]
   [(define-func ID ARG ... BLOCK)
    #'(define (ID ARG ...)
@@ -126,7 +126,6 @@
 
 
 (define (math operator expression1 expression2)
-  (println operator)
   (match operator
     ["SUM OF" (+ expression1 expression2)]
     ["DIFF OF" (- expression1 expression2)]
@@ -136,4 +135,13 @@
     ["BIGGR OF" (max expression1 expression2)]
     ["SMALLR OF" (min expression1 expression2)]))
 
-(provide program block statement declare assign expression cast define-func call-func return statement-expresssion it math)
+(define (compare operator expression1 expression2)
+  (match operator
+    ["BOTH SAEM" (equal? expression1 expression2)]
+    ["DIFFRINT" (not (equal? expression1 expression2))]))
+
+(define (visible _ . args)
+  (displayln (string-join (map (lambda (x) (format "~a" x)) args))))
+
+(provide program block statement declare assign expression cast define-func call-func return
+         statement-expresssion it math compare visible)

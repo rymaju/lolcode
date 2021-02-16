@@ -8,7 +8,9 @@
                                        "HOW IZ I" "YR" "AN YR" "IF U SAY SO" "I IZ" "MKAY"
                                        "FOUND YR" "GTFO" "IT"
                                        "SUM OF" "DIFF OF" "PRODUKT OF" "QUOSHUNT OF"
-                                       "MOD OF" "BIGGR OF" "SMALLR OF" "AN"))
+                                       "MOD OF" "BIGGR OF" "SMALLR OF" "AN"
+                                       "BOTH SAEM" "DIFFRINT" "VISIBLE"))
+
 (define-lex-abbrev types (:or "TROOF" "YARN" "NUMBR" "NUMBAR" "NOOB"))
 
 (define (make-tokenizer port)
@@ -17,7 +19,7 @@
       (lexer-srcloc
        ["\n" (token lexeme lexeme)]
        [whitespace (token lexeme #:skip? #t)]
-       [(from/to "BTW" "\n") (next-token)]
+       [(from/to "BTW" "\n") (token "\n" "\n")]
        [(from/to "OBTW" "TLDR") (next-token)]
        [reserved-terms (token lexeme lexeme)]
        [types (token 'TYPE lexeme)]

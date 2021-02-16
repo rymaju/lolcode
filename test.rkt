@@ -14,6 +14,8 @@ HAI
        GTFO
     IF U SAY SO
 
+
+
     HOW IZ I FIVEIFY
        FOUND YR 5
     IF U SAY SO
@@ -24,6 +26,29 @@ HAI
     I HAS A FUNKSHUN ITZ STRINGIFY
 
     I HAS A MATH ITZ SUM OF 1 AN PRODUKT OF MOD OF 4 AN 5 AN DIFF OF 6 AN 2 BTW equals 17
+    I HAS A CMPR ITZ BOTH SAEM 1 AN BIGGR OF 1 AN 1 BTW should be true
 
+    I HAS A OTHER_CMPR ITZ BOTH SAEM 2 AN SMALLR OF 2 AN 1 BTW should be false
+
+    OBTW MACKS should be 4 TLDR
+    I HAS A MACKS ITZ BIGGR OF SMALLR OF 1 AN 5 AN BIGGR OF 2 AN BIGGR OF 3 AN 4
+
+    DIFFRINT 1 AN 2
+
+    BTW IT should be #true
+
+    VISIBLE IT
+
+    BTW lets test to see if IT is locally scoped
+
+    HOW IZ I FOURIFY
+       4
+       VISIBLE IT
+       BTW FOUND YR IT BTW this is a bug, if we "return" it then it returns the it from the outer scope, not the inner function scope ;-;
+    IF U SAY SO
+
+    TMP R I IZ FOURIFY MKAY
+    VISIBLE TMP
+    VISIBLE IT
 
 KTHXBYE
