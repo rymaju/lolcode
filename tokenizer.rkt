@@ -9,17 +9,19 @@
                                        "FOUND YR" "GTFO" "IT"
                                        "SUM OF" "DIFF OF" "PRODUKT OF" "QUOSHUNT OF"
                                        "MOD OF" "BIGGR OF" "SMALLR OF" "AN"
-                                       "BOTH SAEM" "DIFFRINT" "VISIBLE"))
+                                       "BOTH SAEM" "DIFFRINT" "VISIBLE"
+                                       "O RLY?" "YA RLY" "MEBBE" "NO WAI" "OIC"))
 
 (define-lex-abbrev types (:or "TROOF" "YARN" "NUMBR" "NUMBAR" "NOOB"))
+(define LINE-SEP (token 'LS 'LS))
 
 (define (make-tokenizer port)
   (define (next-token)
     (define lolcode-lexer
       (lexer-srcloc
-       ["\n" (token lexeme lexeme)]
+       [(:or "\n" ",") LINE-SEP]
        [whitespace (token lexeme #:skip? #t)]
-       [(from/to "BTW" "\n") (token "\n" "\n")]
+       [(from/to "BTW" "\n") LINE-SEP]
        [(from/to "OBTW" "TLDR") (next-token)]
        [reserved-terms (token lexeme lexeme)]
        [types (token 'TYPE lexeme)]

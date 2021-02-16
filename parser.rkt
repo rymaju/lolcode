@@ -1,21 +1,27 @@
 #lang brag
 
-program: /"\n"* /"HAI" /"\n"+ block /"KTHXBYE" /"\n"*
+program: /LS* /"HAI" /LS+ block /"KTHXBYE" /LS*
 
 block: statement*
 
-statement: (declare | assign | define-func | visible | statement-expresssion | return) /"\n"+ 
+statement: (declare | assign | define-func | visible |
+            statement-expresssion | return | if-then) /LS+ 
 
 statement-expresssion: expression
 
-define-func : /"HOW IZ I" ID (/"YR" ID (/"AN YR" ID)*)? /"\n"+ block /"IF U SAY SO"
+define-func : /"HOW IZ I" ID (/"YR" ID (/"AN YR" ID)*)? /LS+ block /"IF U SAY SO"
 
 return: /"FOUND YR" expression
       | /"GTFO"
 
 it: /"IT"
 
-visible: "VISIBLE" expression
+visible: /"VISIBLE" expression
+
+if-then: /"O RLY?" /LS+ "YA RLY" /LS+ block
+                       ("MEBBE" expression /LS+ block)*
+                       ("NO WAI" /LS+ block)? /"OIC"
+
 
 call-func: /"I IZ" ID (/"YR" ID (/"AN YR" ID)*)? /"MKAY"
 

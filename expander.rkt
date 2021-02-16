@@ -140,8 +140,14 @@
     ["BOTH SAEM" (equal? expression1 expression2)]
     ["DIFFRINT" (not (equal? expression1 expression2))]))
 
-(define (visible _ . args)
+(define (visible . args)
   (displayln (string-join (map (lambda (x) (format "~a" x)) args))))
 
+(define-macro-cases if-then
+  [(if-then) (void)]
+  [(if-then "NO WAI" BLOCK) #'BLOCK]
+  [(if-then "MEBBE" EXPR BLOCK REST ...) #'(if EXPR BLOCK (if-then REST ...))]
+  [(if-then "YA RLY" BLOCK REST ...) #'(if (expr->bool (peek-it)) BLOCK (if-then REST ...))])
+
 (provide program block statement declare assign expression cast define-func call-func return
-         statement-expresssion it math compare visible)
+         statement-expresssion it math compare visible if-then)
