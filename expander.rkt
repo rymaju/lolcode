@@ -66,10 +66,13 @@
 (define (cast expr type)
   (match type
     ["TROOF" (expr->bool expr)] ; only #f, [], "", and 0 are falsey
-    ["YARN" (format "~a" expr)]
+    ["YARN" (expr->string expr)]
     ["NUMBR" (expr->int expr) ]
     ["NUMBAR" (expr->float expr) ]
     ["NOOB" (void)]))
+
+(define (expr->string expr)
+  (format "~a" expr))
 
 (define (expr->bool expr)
   (not (fail? expr)))
@@ -199,6 +202,8 @@
   [(inc/dec "UPPIN" VAR) #'(set! VAR (add1 VAR))]
   [(inc/dec "NERFIN" VAR) #'(set! VAR (sub1 VAR))])
 
+(define (string-concat . exprs) (apply string-append (map expr->string exprs)))
+
 (provide program block statement declare assign expression cast define-func call-func return
          statement-expresssion it math compare visible if-then
-         case-statement  loop)
+         case-statement loop string-concat)

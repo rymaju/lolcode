@@ -99,4 +99,16 @@ HAI
       OMGWTF
           VISIBLE "FISH IS TRANSPARENT"
     OIC
+
+    VISIBLE SMOOSH "A" "B" "C" MKAY
+    
 KTHXBYE
+
+
+
+
+
+
+
+
+

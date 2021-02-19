@@ -30,7 +30,7 @@ call-func: /"I IZ" ID (/"YR" ID (/"AN YR" ID)*)? /"MKAY"
 
 cast: /"MAEK" expression /"A" TYPE
 
-expression: BOOLEAN | INTEGER | FLOAT | STRING | ID | cast | call-func | it | math | compare 
+expression: BOOLEAN | INTEGER | FLOAT | STRING | ID | cast | call-func | it | math | compare | string-concat
 
 math: "SUM OF" expression /"AN" expression
     | "DIFF OF" expression /"AN" expression
@@ -39,6 +39,8 @@ math: "SUM OF" expression /"AN" expression
     | "MOD OF" expression /"AN" expression
     | "BIGGR OF" expression /"AN" expression
     | "SMALLR OF" expression /"AN" expression
+
+string-concat: /"SMOOSH" (expression (/"AN"? expression)*)? /"MKAY"
 
 loop: /"IM IN YR" /ID ("UPPIN" | "NERFIN") /"YR" ID ("TIL"|"WILE") expression /LS+ block /"IM OUTTA YR" /ID
 

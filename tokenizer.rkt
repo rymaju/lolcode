@@ -13,7 +13,7 @@
                                        "O RLY?" "YA RLY" "MEBBE" "NO WAI" "OIC"
                                        "WTF?" "OMG" "OMGWTF"
                                        "IM IN YR" "IM OUTTA YR" "TIL" "WILE"
-                                       "UPPIN" "NERFIN"
+                                       "UPPIN" "NERFIN" "SMOOSH"
                                        ))
 
 (define-lex-abbrev types (:or "TROOF" "YARN" "NUMBR" "NUMBAR" "NOOB"))
