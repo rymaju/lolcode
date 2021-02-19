@@ -10,7 +10,11 @@
                                        "SUM OF" "DIFF OF" "PRODUKT OF" "QUOSHUNT OF"
                                        "MOD OF" "BIGGR OF" "SMALLR OF" "AN"
                                        "BOTH SAEM" "DIFFRINT" "VISIBLE"
-                                       "O RLY?" "YA RLY" "MEBBE" "NO WAI" "OIC"))
+                                       "O RLY?" "YA RLY" "MEBBE" "NO WAI" "OIC"
+                                       "WTF?" "OMG" "OMGWTF"
+                                       "IM IN YR" "IM OUTTA YR" "TIL" "WILE"
+                                       "UPPIN" "NERFIN"
+                                       ))
 
 (define-lex-abbrev types (:or "TROOF" "YARN" "NUMBR" "NUMBAR" "NOOB"))
 (define LINE-SEP (token 'LS 'LS))

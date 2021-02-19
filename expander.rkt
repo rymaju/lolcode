@@ -51,7 +51,7 @@
 (define-macro (statement CONTENTS) #'CONTENTS)
 
 (define-macro (block STATEMENT ...)
-  #'(begin STATEMENT ...))
+  #'(begin STATEMENT ... (void)))
 
 (define-macro-cases declare
   [(declare VAR) #'(define VAR (void))]
@@ -149,5 +149,56 @@
   [(if-then "MEBBE" EXPR BLOCK REST ...) #'(if EXPR BLOCK (if-then REST ...))]
   [(if-then "YA RLY" BLOCK REST ...) #'(if (expr->bool (peek-it)) BLOCK (if-then REST ...))])
 
+(define-macro (case-statement BRANCHES ...)
+  #'(let/cc break
+      (push-return! break)
+      (case-ladder (peek-it) #f BRANCHES ...)
+      (pop-return!)
+      (void)))
+
+(define-macro-cases case-ladder
+  [(case-ladder IT FALLING?) (void)]
+  [(case-ladder IT FALLING? ELSE-BLOCK) #'ELSE-BLOCK]
+  [(case-ladder IT FALLING? CASE BLOCK REST ...) #'(if (or FALLING? (equal? CASE IT))
+                                                     (let ()
+                                                       BLOCK
+                                                       (case-ladder IT #t REST ...))
+                                                     (case-ladder IT #f REST ...))])
+  
+(define-macro-cases loop
+  [(loop BLOCK) #'(let/cc break
+                        (push-return! break)
+                        (for ([i (in-naturals)])
+                          BLOCK)
+                        (pop-return!)
+                        (void))]
+  [(loop OP VAR BLOCK) #'(let/cc break
+                               (push-return! break)
+                               (for ([i (in-naturals)])
+                                 (inc/dec OP VAR)
+                                 BLOCK)
+                               (pop-return!)
+                               (void))]
+  [(loop OP VAR "TIL" EXPR BLOCK) #'(let/cc break
+                                          (push-return! break)
+                                          (for ([i (in-naturals)]
+                                                #:break EXPR)
+                                            (inc/dec OP VAR)
+                                            BLOCK)
+                                          (pop-return!)
+                                          (void))]
+  [(loop OP VAR "WILE" EXPR BLOCK) #'(let/cc break
+                                          (push-return! break)
+                                          (for ([i (in-naturals)]
+                                                #:break (not EXPR))
+                                            (inc/dec OP VAR)
+                                            BLOCK)
+                                          (pop-return!)
+                                          (void))])
+(define-macro-cases inc/dec
+  [(inc/dec "UPPIN" VAR) #'(set! VAR (add1 VAR))]
+  [(inc/dec "NERFIN" VAR) #'(set! VAR (sub1 VAR))])
+
 (provide program block statement declare assign expression cast define-func call-func return
-         statement-expresssion it math compare visible if-then)
+         statement-expresssion it math compare visible if-then
+         case-statement  loop)

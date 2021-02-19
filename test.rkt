@@ -75,6 +75,28 @@ HAI
         YA RLY, VISIBLE "J00 HAV A CAT"
         NO WAI, VISIBLE "J00 SUX"
     OIC
-   
 
+    
+
+    I HAS A INT ITZ 0
+    IM IN YR LOOP UPPIN YR INT TIL BOTH SAEM INT AN 10
+        VISIBLE INT
+    IM OUTTA YR LOOP
+
+    "Y"
+    VISIBLE IT
+    WTF?
+      OMG "R"
+          VISIBLE IT
+          VISIBLE "RED FISH"
+          GTFO
+      OMG "Y"
+          VISIBLE "YELLOW FISH"
+      OMG "G"
+      OMG "B"
+          VISIBLE "FISH HAS A FLAVOR"
+          GTFO
+      OMGWTF
+          VISIBLE "FISH IS TRANSPARENT"
+    OIC
 KTHXBYE

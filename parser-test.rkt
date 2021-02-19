@@ -30,3 +30,16 @@ HERE
   
 (parse-to-datum
   (apply-tokenizer-maker make-tokenizer test-program-2))
+
+(define test-program-3 #<<HERE
+HAI
+    I HAS A INT ITZ 0
+    IM IN YR LOOP UPPIN YR INT TIL BOTH SAEM INT AN 10
+        VISIBLE INT
+    IM OUTTA YR LOOP
+KTHXBYE
+HERE
+)
+
+(parse-to-datum
+  (apply-tokenizer-maker make-tokenizer test-program-3))
