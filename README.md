@@ -4,6 +4,8 @@ Implementation of [LOLCODE](https://en.wikipedia.org/wiki/LOLCODE) in [Racket](h
 
 Once 1.2 is down, I plan to branch it off to another branch off of `main`, and start work on 1.3 with backwards compatibility.
 
+UPDATE: This project got put on the side because of work/school/clubs, but I plan to pick it up around May!
+
 ## 🔨 Current status
 
 Legend:
