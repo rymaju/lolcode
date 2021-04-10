@@ -1,0 +1,4 @@
+#lang lolcode
+HAI 
+  VISIBLE 1, VISIBLE 2, VISIBLE 3
+KTHXBYE

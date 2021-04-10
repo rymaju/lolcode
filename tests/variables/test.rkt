@@ -1,0 +1,8 @@
+#lang lolcode
+HAI 
+  I HAS A X
+  X R 2
+  I HAS A Y ITZ 5
+  VISIBLE X
+  VISIBLE Y
+KTHXBYE

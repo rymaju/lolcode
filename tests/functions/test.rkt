@@ -1,0 +1,9 @@
+#lang lolcode
+HAI 
+  HOW IZ I FIVEIFY
+    FOUND YR 5
+  IF U SAY SO
+
+  VISIBLE I IZ FIVEIFY MKAY
+  
+KTHXBYE
