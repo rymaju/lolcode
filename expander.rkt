@@ -61,6 +61,36 @@
 
 (define-macro (expression VAL) #'VAL)
 
+
+(define (hexchar->number ch)
+  (match (char-upcase ch)
+             [#\A 10]
+             [#\B 11]
+             [#\C 12]
+             [#\D 13]
+             [#\E 14]
+             [#\F 15]
+             [else (if (char-numeric? ch) (- (char->integer ch) 48) (error "Invalid hex"))]
+             ))
+
+(define (hexstring->number hexstring)
+  (foldl (lambda (hex acc) (+ (* acc 16) (hexchar->number hex)))
+
+         0 (string->list hexstring)))
+
+(define (convert-lolcode-hex lolcode-hexstring)
+  (number->string (hexstring->number (substring lolcode-hexstring 2 (sub1 (string-length lolcode-hexstring))))))
+
+
+(define-syntax string->variable-name
+  (lambda (stx)
+    (syntax-case stx ()
+      ((_ str)
+       (string? (syntax->datum #'str))
+       (datum->syntax #'str (string->symbol (syntax->datum #'str)))))))
+;; (regexp-replace* #rx":\\([0-9a-fA-F]+\\)" "qwewqe :(abcedf29218) wqeqwe" convert-lolcode-hex)
+;; (let ([x 5])(regexp-replace* #rx":{[A-Za-z]+([A-Za-z]|[0-9]|_)*}" "qwewqe :{x} wqeqwe" convert-lolcode-var-template)) 
+;; (let ([x 5])(regexp-replace* #rx":{([A-Za-z]+([A-Za-z]|[0-9]|_)*)}" "qwewqe :{x} wqeqwe" convert-lolcode-var-template)) 
 (define (statement-expresssion expr) (set-it! expr))
 
 (define (cast expr type)
@@ -155,8 +185,10 @@
 (define-macro (case-statement BRANCHES ...)
   #'(let/cc break
       (push-return! break)
+      (push-it! (peek-it))
       (case-ladder (peek-it) #f BRANCHES ...)
       (pop-return!)
+      (pop-it!)
       (void)))
 
 (define-macro-cases case-ladder
@@ -204,6 +236,9 @@
 
 (define (string-concat . exprs) (apply string-append (map expr->string exprs)))
 
+(define-macro (scanline ID) #'(let ([data (read-line (current-input-port) 'any)])
+                                (if (string? data) (set! ID data) (error "Unexpected EOF."))))
+
 (provide program block statement declare assign expression cast define-func call-func return
          statement-expresssion it math compare visible if-then
-         case-statement loop string-concat)
+         case-statement loop string-concat scanline)

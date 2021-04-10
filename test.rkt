@@ -83,6 +83,7 @@ HAI
         VISIBLE INT
     IM OUTTA YR LOOP
 
+
     "Y"
     VISIBLE IT
     WTF?
@@ -100,7 +101,16 @@ HAI
           VISIBLE "FISH IS TRANSPARENT"
     OIC
 
-    VISIBLE SMOOSH "A" "B" "C" MKAY
+    BTW VISIBLE SMOOSH "A" "B" "C" 123 MKAY
+
+
+
+    VISIBLE IT
+
+    "HELLO, WORLD!"
+
+    VISIBLE IT
+
     
 KTHXBYE
 

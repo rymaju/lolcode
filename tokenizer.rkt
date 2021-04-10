@@ -13,7 +13,7 @@
                                        "O RLY?" "YA RLY" "MEBBE" "NO WAI" "OIC"
                                        "WTF?" "OMG" "OMGWTF"
                                        "IM IN YR" "IM OUTTA YR" "TIL" "WILE"
-                                       "UPPIN" "NERFIN" "SMOOSH"
+                                       "UPPIN" "NERFIN" "SMOOSH" "GIMMEH"
                                        ))
 
 (define-lex-abbrev types (:or "TROOF" "YARN" "NUMBR" "NUMBAR" "NOOB"))
@@ -24,6 +24,7 @@
     (define lolcode-lexer
       (lexer-srcloc
        [(:or "\n" ",") LINE-SEP]
+       [(:or "...\n") (next-token)]
        [whitespace (token lexeme #:skip? #t)]
        [(from/to "BTW" "\n") LINE-SEP]
        [(from/to "OBTW" "TLDR") (next-token)]

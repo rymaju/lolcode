@@ -25,7 +25,7 @@ Legend:
 - ✔️ Case
 - ✔️ Loops
 - 🚧 IO
-- ❌ String formatting
+- 🚧 String formatting
 
 ### 🈴 Milestone: Rewrite in racket/base
 
