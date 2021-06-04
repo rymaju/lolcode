@@ -24,6 +24,8 @@ jobs:
       - uses: actions/checkout@v2
       # Add Racket to PATH
       - uses: Bogdanp/setup-racket@v1.4
+        with: 
+          version: 8.0 
 
       # Runs a single command using the runners shell
       - name: Install package locally
