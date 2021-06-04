@@ -26,11 +26,14 @@ jobs:
       - uses: Bogdanp/setup-racket@v1.4
         with: 
           version: 8.1
-
+      
+      - name: Install br
+        run: raco pkg install beautiful-racket
+        
       # Runs a single command using the runners shell
       - name: Install package locally
         run: raco pkg install
-        
+  
       # Run the test shell script
       - name: Run tests
         run: ./test.sh
