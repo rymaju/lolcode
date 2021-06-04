@@ -28,7 +28,7 @@ jobs:
           version: 8.1
       
       - name: Install br
-        run: raco pkg install beautiful-racket --auto
+        run: raco pkg install https://github.com/mbutterick/beautiful-racket/tree/master/beautiful-racket --auto
         
       # Runs a single command using the runners shell
       - name: Install package locally
