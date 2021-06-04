@@ -34,8 +34,8 @@ jobs:
       - name: Install package locally
         run: raco pkg install
   
-      # Run the test shell script
+      # Run the tests
       - name: Run tests
-        run: ./test.sh
+        run: raco test ./tests
              
 
