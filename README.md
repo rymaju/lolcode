@@ -21,12 +21,12 @@ Legend:
 - ✔️ Functions
 - ✔️ Math
 - ✔️ Comparison
-- 🚧 IT
+- ✔️ IT
 - ✔️ Comparison
 - ✔️ If/else
 - ✔️ Case
 - ✔️ Loops
-- 🚧 IO
+- ✔️ IO
 - 🚧 String formatting
 
 ### 🈴 Milestone: Rewrite in racket/base

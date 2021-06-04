@@ -82,15 +82,51 @@
   (number->string (hexstring->number (substring lolcode-hexstring 2 (sub1 (string-length lolcode-hexstring))))))
 
 
-(define-syntax string->variable-name
-  (lambda (stx)
-    (syntax-case stx ()
-      ((_ str)
-       (string? (syntax->datum #'str))
-       (datum->syntax #'str (string->symbol (syntax->datum #'str)))))))
+
+;; from
+
+(define (s-index-of hay needle)
+  (define n (string-length needle))
+  (define h (string-length hay))
+  (and (<= n h) ; if the needle is longer than hay, then the needle can not be found
+       (for/or ([i (- h n -1)]
+                #:when (string=? (substring hay i (+ i n)) needle))
+         i)))
+
+(define (parse-str str)
+  ;; Assume that @{} cannot be nested and that the braces are always matched.
+  ;; Obviously, in a real parsing function, these assumptions would need to be validated.
+  (define lst (regexp-split #rx"@{" str))
+  ;; After splitting we have a list like this: '("An error occured at " "file}: " "line}.")
+  ;; We'll go over it, building a list of expressions to be passed to string-append as we go.
+  (define chunks
+    (for/fold ([result '()])
+              ([chunk (rest lst)])        ; we don't need the first element here
+      (let*
+          ;; convert a string into a port
+          ([is (open-input-string chunk)]
+           ;; call original read to get the expression from inside brackets
+           [form (read is)]
+           ;; read what remains in the port back into a string
+           [after-form (port->string is)]
+           ;; drop the closing brace
+           [after-brace (substring after-form (add1 (s-index-of after-form "}")))])
+        ;; ~a is a generic "toString" function in Racket
+        (append result `((~a ,form) ,after-brace)))))
+  ;; chunks now looks like this: ((~a file) ":" (~a line) ".")
+  `(string-append ,(first lst) ,@chunks))
+
+
+
+(define (lol-string STR) STR)
+
+
 ;; (regexp-replace* #rx":\\([0-9a-fA-F]+\\)" "qwewqe :(abcedf29218) wqeqwe" convert-lolcode-hex)
 ;; (let ([x 5])(regexp-replace* #rx":{[A-Za-z]+([A-Za-z]|[0-9]|_)*}" "qwewqe :{x} wqeqwe" convert-lolcode-var-template)) 
 ;; (let ([x 5])(regexp-replace* #rx":{([A-Za-z]+([A-Za-z]|[0-9]|_)*)}" "qwewqe :{x} wqeqwe" convert-lolcode-var-template)) 
+
+
+
 (define (statement-expresssion expr) (set-it! expr))
 
 (define (cast expr type)
@@ -146,13 +182,15 @@
          (pop-return!)
          (pop-it!)))])
 
+
 (define-macro-cases return
   [(return) #'(let ()
                 (pop-it!)
                 ((pop-return!) (void)))]
-  [(return EXPR) #'(let ()
+  [(return EXPR) #'(let ([ret-val EXPR])
                      (pop-it!)
-                     ((pop-return!) EXPR))])
+                     ((pop-return!) ret-val))])
+
 
 (define-macro (call-func FUNC ARG ...)
   #'(FUNC ARG ...))
@@ -173,7 +211,11 @@
     ["BOTH SAEM" (equal? expression1 expression2)]
     ["DIFFRINT" (not (equal? expression1 expression2))]))
 
-(define (visible . args)
+(define visible identity)
+
+(define (visible-print . args)
+  (display (string-join (map (lambda (x) (format "~a" x)) args))))
+(define (visible-println . args)
   (displayln (string-join (map (lambda (x) (format "~a" x)) args))))
 
 (define-macro-cases if-then
@@ -239,6 +281,8 @@
 (define-macro (scanline ID) #'(let ([data (read-line (current-input-port) 'any)])
                                 (if (string? data) (set! ID data) (error "Unexpected EOF."))))
 
+
+
 (provide program block statement declare assign expression cast define-func call-func return
-         statement-expresssion it math compare visible if-then
-         case-statement loop string-concat scanline)
+         statement-expresssion it math compare visible visible-print visible-println if-then
+         case-statement loop string-concat scanline lol-string   )

@@ -18,7 +18,11 @@ return: /"FOUND YR" expression
 
 it: /"IT"
 
-visible: /"VISIBLE" expression
+visible: visible-print
+       | visible-println
+
+visible-println: /"VISIBLE" expression  expression*
+visible-print: /"VISIBLE" expression  expression* /"!"
 
 if-then: /"O RLY?" /LS+ "YA RLY" /LS+ block
                        ("MEBBE" expression /LS+ block)*
@@ -32,8 +36,9 @@ call-func: /"I IZ" ID (/"YR" ID (/"AN YR" ID)*)? /"MKAY"
 
 cast: /"MAEK" expression /"A" TYPE
 
-expression: BOOLEAN | INTEGER | FLOAT | STRING | ID | cast | call-func | it | math | compare | string-concat
+expression: BOOLEAN | INTEGER | FLOAT | lol-string | ID | cast | call-func | it | math | compare | string-concat
 
+lol-string: STRING
 
 math: "SUM OF" expression /"AN" expression
     | "DIFF OF" expression /"AN" expression

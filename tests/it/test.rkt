@@ -1,12 +1,16 @@
 #lang lolcode
-HAI 
-  42
-  VISIBLE IT
-
-  HOW IZ I FOURIFY
-    4
+HAI
+    2
     VISIBLE IT
-    BTW FOUND YR IT BTW this is a bug, if we "return" it then it returns the it from the outer scope, not the inner function scope ;-;
-  IF U SAY SO
 
+    BTW lets test to see if IT is locally scoped
+
+    HOW IZ I FOURIFY
+       4
+       VISIBLE IT
+    IF U SAY SO
+
+    I HAS A TMP ITZ I IZ FOURIFY MKAY
+    VISIBLE TMP
+    VISIBLE IT
 KTHXBYE

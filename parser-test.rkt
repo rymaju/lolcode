@@ -43,3 +43,13 @@ HERE
 
 (parse-to-datum
   (apply-tokenizer-maker make-tokenizer test-program-3))
+
+(define test-program-4 #<<HERE
+HAI
+    VISIBLE 1 2 3
+KTHXBYE
+HERE
+)
+
+(parse-to-datum
+  (apply-tokenizer-maker make-tokenizer test-program-4))

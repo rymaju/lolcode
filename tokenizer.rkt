@@ -13,7 +13,7 @@
                                        "O RLY?" "YA RLY" "MEBBE" "NO WAI" "OIC"
                                        "WTF?" "OMG" "OMGWTF"
                                        "IM IN YR" "IM OUTTA YR" "TIL" "WILE"
-                                       "UPPIN" "NERFIN" "SMOOSH" "GIMMEH"
+                                       "UPPIN" "NERFIN" "SMOOSH" "GIMMEH" "!"
                                        ))
 
 (define-lex-abbrev types (:or "TROOF" "YARN" "NUMBR" "NUMBAR" "NOOB"))
@@ -42,5 +42,8 @@
        [varchars (token 'ID (string->symbol lexeme))]))
     (lolcode-lexer port))  
   next-token)
+
+
+
 
 (provide make-tokenizer)
