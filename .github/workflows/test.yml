@@ -25,7 +25,7 @@ jobs:
       # Add Racket to PATH
       - uses: Bogdanp/setup-racket@v1.4
         with: 
-          version: 8.0 
+          version: 8.1
 
       # Runs a single command using the runners shell
       - name: Install package locally
