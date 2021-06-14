@@ -24,7 +24,7 @@ VISIBLE IT BTW prints "nested"
 ```
 
 
-## 🔨 Current status
+## 🛣️ Roadmap
 
 Legend:
 
@@ -32,7 +32,9 @@ Legend:
 - 🚧 Work in Progress: at least partially implemented but failing at least one test
 - ❌ Incomplete / Not Started
 
-### 🌺 Milestone: proof of concept LOLCODE 1.2 in `#lang br`
+### 🌺 Milestone: proof of concept LOLCODE 1.2 + Lambdas, Arrays, Dictionaries in `#lang br`
+
+Expected to finish by July 2021
 
 - ✔️ Assignment and Variables
 - ✔️ Casting
@@ -49,19 +51,22 @@ Legend:
 
 New features to be added:
 
-- ❌ First class functions / Lambdas (FUNKSHUN)
+- ✔️ First class functions / Lambdas
+- ❌ Arrays / Vectors
+- ❌ Cons cells / Pairs
+- ❌ Dictionaries / Associative arrays
 
 ### 🈴 Milestone: Rewrite in racket/base
+
+_COMING SOON_
+
+Expected to finish by August 2021
 
 ### ⚖️ Milestone: Rewrite with types or contracts
 
 _COMING SOON_
 
 ### 🧪 Milestone: Tests, tests, and more tests
-
-_COMING SOON_
-
-### 😼 Milestone: LOLCODE 1.3
 
 _COMING SOON_
 
