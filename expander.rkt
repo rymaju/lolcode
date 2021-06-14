@@ -75,7 +75,6 @@
 
 (define (hexstring->number hexstring)
   (foldl (lambda (hex acc) (+ (* acc 16) (hexchar->number hex)))
-
          0 (string->list hexstring)))
 
 (define (convert-lolcode-hex lolcode-hexstring)
@@ -83,42 +82,8 @@
 
 
 
-;; from
 
-(define (s-index-of hay needle)
-  (define n (string-length needle))
-  (define h (string-length hay))
-  (and (<= n h) ; if the needle is longer than hay, then the needle can not be found
-       (for/or ([i (- h n -1)]
-                #:when (string=? (substring hay i (+ i n)) needle))
-         i)))
-
-(define (parse-str str)
-  ;; Assume that @{} cannot be nested and that the braces are always matched.
-  ;; Obviously, in a real parsing function, these assumptions would need to be validated.
-  (define lst (regexp-split #rx"@{" str))
-  ;; After splitting we have a list like this: '("An error occured at " "file}: " "line}.")
-  ;; We'll go over it, building a list of expressions to be passed to string-append as we go.
-  (define chunks
-    (for/fold ([result '()])
-              ([chunk (rest lst)])        ; we don't need the first element here
-      (let*
-          ;; convert a string into a port
-          ([is (open-input-string chunk)]
-           ;; call original read to get the expression from inside brackets
-           [form (read is)]
-           ;; read what remains in the port back into a string
-           [after-form (port->string is)]
-           ;; drop the closing brace
-           [after-brace (substring after-form (add1 (s-index-of after-form "}")))])
-        ;; ~a is a generic "toString" function in Racket
-        (append result `((~a ,form) ,after-brace)))))
-  ;; chunks now looks like this: ((~a file) ":" (~a line) ".")
-  `(string-append ,(first lst) ,@chunks))
-
-
-
-(define (lol-string STR) STR)
+(define (lol-string . tokens) (apply string-append (map (lambda (x) (format "~a" x)) tokens)))
 
 
 ;; (regexp-replace* #rx":\\([0-9a-fA-F]+\\)" "qwewqe :(abcedf29218) wqeqwe" convert-lolcode-hex)

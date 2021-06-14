@@ -2,9 +2,17 @@
 
 Implementation of [LOLCODE](https://en.wikipedia.org/wiki/LOLCODE) in [Racket](https://racket-lang.org/). Currently the plan is to hack everything in [spec 1.2](https://github.com/justinmeza/lolcode-spec/blob/master/v1.2/lolcode-spec-v1.2.md) together with `#lang br` to get a proof of concept down. Once thats done, I plan to do a proper rewrite in Typed Racket or Racket with Contracts. Finally, robust testing with `rackunit`.
 
-Once 1.2 is down, I plan to branch it off to another branch off of `main`, and start work on 1.3 with backwards compatibility.
+Once 1.2 is down, I plan to branch it off to another branch off of `main`, and start work on 1.3 with *some* backwards compatibility.
 
-UPDATE: This project got put on the side because of work/school/clubs, but I plan to pick it up around May!
+## New / Breaking changes to LOLCODE 1.2
+
+- Program "version number" (ew) is optional and never used
+- String formatting is simplified
+  - Removed ":>" (\g beep)
+  - Removed ":[unicode char name]"
+  - Removed ":\<unicode hex code>"
+  - ":" isn't really an escape character, funny : shorthands e.x. ":)" => "/n" doesn't replace the ability to use "/n"
+- Added FUNKSHUN type (first class functions / lambdas)
 
 ## 🔨 Current status
 
@@ -27,7 +35,11 @@ Legend:
 - ✔️ Case
 - ✔️ Loops
 - ✔️ IO
-- 🚧 String formatting
+- ✔️ String formatting (Note that string formatting is not being developed to the 1.2 spec, only var string interpolation is being implemented)
+
+New features to be added:
+
+- ❌ First class functions / Lambdas (FUNKSHUN)
 
 ### 🈴 Milestone: Rewrite in racket/base
 

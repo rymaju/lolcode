@@ -38,7 +38,8 @@ cast: /"MAEK" expression /"A" TYPE
 
 expression: BOOLEAN | INTEGER | FLOAT | lol-string | ID | cast | call-func | it | math | compare | string-concat
 
-lol-string: STRING
+lol-string: /STRING-START (CHAR | ID)* /STRING-END
+
 
 math: "SUM OF" expression /"AN" expression
     | "DIFF OF" expression /"AN" expression
