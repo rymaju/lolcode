@@ -1,4 +1,4 @@
-#lang reader "reader.rkt"
+#lang lolcode
 HAI
     I IZ LAMDUH 5 LAMDONE MKAY
     VISIBLE IT
@@ -7,12 +7,3 @@ HAI
     I IZ I IZ LAMDUH LAMDUH "nested" LAMDONE LAMDONE MKAY MKAY
     VISIBLE IT
 KTHXBYE
-
-
-
-
-
-
-
-
-

@@ -2,7 +2,7 @@
 HAI
     I HAS A X
     X R 2
-    VISIBLE "@{X} times"
+    VISIBLE ":{X} times"
 
     I HAS A Y ITZ WIN
     Y R MAEK X A NOOB

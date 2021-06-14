@@ -32,14 +32,16 @@ case-statement: /"WTF?" /LS+ (/"OMG" expression /LS+ block)+ ( /"OMGWTF" /LS+ bl
 
 
 
-call-func: /"I IZ" ID (/"YR" ID (/"AN YR" ID)*)? /"MKAY"
+call-func: /"I IZ" (ID | lol-lambda| call-func) (/"YR" expression (/"AN YR" expression)*)? /"MKAY"
 
 cast: /"MAEK" expression /"A" TYPE
 
-expression: BOOLEAN | INTEGER | FLOAT | lol-string | ID | cast | call-func | it | math | compare | string-concat
+expression: BOOLEAN | INTEGER | FLOAT | lol-string | ID | cast | call-func | it | math | compare
+          | string-concat | lol-lambda
 
 lol-string: /STRING-START (CHAR | ID)* /STRING-END
 
+lol-lambda: /"LAMDUH" (/"YR" ID (/"AN YR" ID)*)? expression /"LAMDONE"                              
 
 math: "SUM OF" expression /"AN" expression
     | "DIFF OF" expression /"AN" expression

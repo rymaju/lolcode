@@ -53,3 +53,28 @@ HERE
 
 (parse-to-datum
   (apply-tokenizer-maker make-tokenizer test-program-4))
+
+(define test-program-5 #<<HERE
+HAI
+    HOW IZ I STRINGIFY YR PARAM_A AN YR PARAM_B
+       X R MAEK PARAM_A A YARN
+       Y R MAEK PARAM_B A YARN
+       GTFO
+    IF U SAY SO
+
+
+    I IZ STRINGIFY YR 1 AN YR 2 MKAY
+    
+
+
+    I IZ LAMDUH 5 LAMDONE MKAY
+    I IZ LAMDUH YR X SUM OF 5 AN X LAMDONE MKAY
+    I HAS A Z ITZ LAMDUH YR X SUM OF 5 AN X LAMDONE
+    VISIBLE Z
+    I IZ Z YR 7 MKAY
+KTHXBYE
+HERE
+)
+
+(parse-to-datum
+  (apply-tokenizer-maker make-tokenizer test-program-5))

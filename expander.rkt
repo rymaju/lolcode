@@ -64,14 +64,14 @@
 
 (define (hexchar->number ch)
   (match (char-upcase ch)
-             [#\A 10]
-             [#\B 11]
-             [#\C 12]
-             [#\D 13]
-             [#\E 14]
-             [#\F 15]
-             [else (if (char-numeric? ch) (- (char->integer ch) 48) (error "Invalid hex"))]
-             ))
+    [#\A 10]
+    [#\B 11]
+    [#\C 12]
+    [#\D 13]
+    [#\E 14]
+    [#\F 15]
+    [else (if (char-numeric? ch) (- (char->integer ch) 48) (error "Invalid hex"))]
+    ))
 
 (define (hexstring->number hexstring)
   (foldl (lambda (hex acc) (+ (* acc 16) (hexchar->number hex)))
@@ -147,6 +147,20 @@
          (pop-return!)
          (pop-it!)))])
 
+(define-macro-cases lol-lambda
+  [(lol-lambda EXPR)
+   #'(lambda ()
+       (push-it! (peek-it))
+       (let ([res EXPR])
+         (pop-it!)
+         res))]
+  [(lol-lambda ARG ... EXPR)
+   #'(lambda (ARG ...)
+       (push-it! (peek-it))
+       (let ([res EXPR])
+         (pop-it!)
+         res))])
+
 
 (define-macro-cases return
   [(return) #'(let ()
@@ -202,41 +216,41 @@
   [(case-ladder IT FALLING?) (void)]
   [(case-ladder IT FALLING? ELSE-BLOCK) #'ELSE-BLOCK]
   [(case-ladder IT FALLING? CASE BLOCK REST ...) #'(if (or FALLING? (equal? CASE IT))
-                                                     (let ()
-                                                       BLOCK
-                                                       (case-ladder IT #t REST ...))
-                                                     (case-ladder IT #f REST ...))])
+                                                       (let ()
+                                                         BLOCK
+                                                         (case-ladder IT #t REST ...))
+                                                       (case-ladder IT #f REST ...))])
   
 (define-macro-cases loop
   [(loop BLOCK) #'(let/cc break
-                        (push-return! break)
-                        (for ([i (in-naturals)])
-                          BLOCK)
-                        (pop-return!)
-                        (void))]
+                    (push-return! break)
+                    (for ([i (in-naturals)])
+                      BLOCK)
+                    (pop-return!)
+                    (void))]
   [(loop OP VAR BLOCK) #'(let/cc break
-                               (push-return! break)
-                               (for ([i (in-naturals)])
-                                 (inc/dec OP VAR)
-                                 BLOCK)
-                               (pop-return!)
-                               (void))]
+                           (push-return! break)
+                           (for ([i (in-naturals)])
+                             (inc/dec OP VAR)
+                             BLOCK)
+                           (pop-return!)
+                           (void))]
   [(loop OP VAR "TIL" EXPR BLOCK) #'(let/cc break
-                                          (push-return! break)
-                                          (for ([i (in-naturals)]
-                                                #:break EXPR)
-                                            (inc/dec OP VAR)
-                                            BLOCK)
-                                          (pop-return!)
-                                          (void))]
+                                      (push-return! break)
+                                      (for ([i (in-naturals)]
+                                            #:break EXPR)
+                                        (inc/dec OP VAR)
+                                        BLOCK)
+                                      (pop-return!)
+                                      (void))]
   [(loop OP VAR "WILE" EXPR BLOCK) #'(let/cc break
-                                          (push-return! break)
-                                          (for ([i (in-naturals)]
-                                                #:break (not EXPR))
-                                            (inc/dec OP VAR)
-                                            BLOCK)
-                                          (pop-return!)
-                                          (void))])
+                                       (push-return! break)
+                                       (for ([i (in-naturals)]
+                                             #:break (not EXPR))
+                                         (inc/dec OP VAR)
+                                         BLOCK)
+                                       (pop-return!)
+                                       (void))])
 (define-macro-cases inc/dec
   [(inc/dec "UPPIN" VAR) #'(set! VAR (add1 VAR))]
   [(inc/dec "NERFIN" VAR) #'(set! VAR (sub1 VAR))])
@@ -250,4 +264,4 @@
 
 (provide program block statement declare assign expression cast define-func call-func return
          statement-expresssion it math compare visible visible-print visible-println if-then
-         case-statement loop string-concat scanline lol-string   )
+         case-statement loop string-concat scanline lol-string lol-lambda)

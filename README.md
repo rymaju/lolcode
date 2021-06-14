@@ -12,7 +12,17 @@ Once 1.2 is down, I plan to branch it off to another branch off of `main`, and s
   - Removed ":[unicode char name]"
   - Removed ":\<unicode hex code>"
   - ":" isn't really an escape character, funny : shorthands e.x. ":)" => "/n" doesn't replace the ability to use "/n"
-- Added FUNKSHUN type (first class functions / lambdas)
+- Added first class functions / lambdas
+
+```
+I HAS A FIRST-CLASS-FUNCTION LAMDUH YR X AN YR Y SUM OF X AN Y LAMDONE
+I IZ FIRST-CLASS-FUNCTION YR 20 AN YR 22
+VISIBLE IT BTW prints 42
+
+I IZ I IZ LAMDUH LAMDUH "nested" LAMDONE LAMDONE MKAY MKAY
+VISIBLE IT BTW prints "nested"
+```
+
 
 ## 🔨 Current status
 

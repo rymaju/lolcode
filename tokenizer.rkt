@@ -15,6 +15,7 @@
                                        "WTF?" "OMG" "OMGWTF"
                                        "IM IN YR" "IM OUTTA YR" "TIL" "WILE"
                                        "UPPIN" "NERFIN" "SMOOSH" "GIMMEH" "!"
+                                       "LAMDUH" "LAMDONE"
                                        ))
 
 (define-lex-abbrev types (:or "TROOF" "YARN" "NUMBR" "NUMBAR" "NOOB"))
