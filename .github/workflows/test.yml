@@ -24,13 +24,18 @@ jobs:
       - uses: actions/checkout@v2
       # Add Racket to PATH
       - uses: Bogdanp/setup-racket@v1.4
-
+        with: 
+          version: 8.1
+      
+      - name: Install br
+        run: raco pkg install --auto beautiful-racket
+        
       # Runs a single command using the runners shell
       - name: Install package locally
         run: raco pkg install
-        
-      # Run the test shell script
+  
+      # Run the tests
       - name: Run tests
-        run: ./test.sh
+        run: raco test ./tests
              
 
